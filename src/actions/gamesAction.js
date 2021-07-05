@@ -1,5 +1,5 @@
 import axios from "axios";
-import { popularGamesURL } from "../api";
+import { popularGamesURL, upcomingGamesURL, newGamesURL } from "../api";
 
 // action creator
 
@@ -10,10 +10,22 @@ export const loadGames = () => async (dispatch) => {
             key: process.env.REACT_APP_API_KEY,
         },
     });
+    const newGamesData = await axios.get(newGamesURL(), {
+        params: {
+            key: process.env.REACT_APP_API_KEY,
+        },
+    });
+    const upcomingData = await axios.get(upcomingGamesURL(), {
+        params: {
+            key: process.env.REACT_APP_API_KEY,
+        },
+    });
     dispatch({
         type: "FETCH_GAMES",
         payload: {
             popular: popularData.data.results,
+            upcoming: upcomingData.data.results,
+            newGames: newGamesData.data.results
         },
     });
 };
