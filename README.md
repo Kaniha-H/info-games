@@ -13,3 +13,7 @@ Une application de news sur les jeux vidéo.
 ```bash
 npm start
 ```
+
+## Lien du projet
+
+https://kaniha-h.github.io/info-games/
