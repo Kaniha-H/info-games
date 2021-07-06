@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // animation
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { fadeIn } from '../animations';
 // redux and routes
 import { fectchSearch } from '../actions/gamesAction'; 
 import { useDispatch } from 'react-redux';
@@ -22,7 +23,7 @@ const Nav = () => {
         dispatch({ type: "CLEAR_SEARCHED" });
     };
     return(
-        <StyledNav>
+        <StyledNav variants={fadeIn} initial='hidden' animate="show">
             <Logo onClick={clearSearch}>
                 <h1>Info Games</h1>
             </Logo>
