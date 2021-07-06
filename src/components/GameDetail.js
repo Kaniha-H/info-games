@@ -16,7 +16,7 @@ const GameDetail = ({ pathId }) => {
       document.body.style.overflow= "auto";
       history.push("/");
     }
-  }
+  };
   // data
   const { screen, game, isLoading } = useSelector((state) => state.detail);
   return(
@@ -27,13 +27,13 @@ const GameDetail = ({ pathId }) => {
               <Stats>
                 <div className="rating">
                   <motion.h3 layoutId={`title ${pathId}`}>{ game.name }</motion.h3>
-                  <p>Rating: { game.rating }</p>
+                  <p>Rating: { game.rating } / 5</p>
                 </div>
                 <Info>
                   <h3>Platforms</h3>
                   <Platforms>
                     { game.platforms.map(data => (
-                      <h3 key={data.platform.id}>{ data.platform.name }</h3>
+                      <p key={data.platform.id} className="platform">{ data.platform.name }</p>
                     )) }
                   </Platforms>
                 </Info>
@@ -100,6 +100,9 @@ const Platforms = styled(motion.div)`
   justify-content: space-evenly;
   img {
     margin-left: 3rem;
+  }
+  p {
+    margin: 0 1rem;
   }
 `;
 const Media = styled(motion.div)`
