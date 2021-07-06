@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 // styling and animation
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled from "styled-components";
+import { motion } from "framer-motion";
 // redux
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { smallImage } from '../util';
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { smallImage } from "../util";
 
-const GameDetail = () => {
+const GameDetail = ({ pathId }) => {
   const history = useHistory();
   // exit detail
   const exitDetailHandler = (e) => {
     const element = e.target;
-    if (element.classList.contains('shadow')) {
-      document.body.style.overflow= 'auto';
-      history.push('/');
+    if (element.classList.contains("shadow")) {
+      document.body.style.overflow= "auto";
+      history.push("/");
     }
   }
   // data
@@ -23,10 +23,10 @@ const GameDetail = () => {
     <>
       {!isLoading && (
         <CardShadow className="shadow" onClick={exitDetailHandler}>
-          <Detail>
+          <Detail layoutId={pathId}>
               <Stats>
                 <div className="rating">
-                  <h3>{ game.name }</h3>
+                  <motion.h3 layoutId={`title ${pathId}`}>{ game.name }</motion.h3>
                   <p>Rating: { game.rating }</p>
                 </div>
                 <Info>
@@ -39,14 +39,14 @@ const GameDetail = () => {
                 </Info>
               </Stats>
               <Media>
-                <img src={smallImage(game.background_image, 1920)} alt={game.background_image} />
+                <motion.img layoutId={`image ${pathId}`} src={smallImage(game.background_image, 1280)} alt={game.background_image} />
               </Media>
               <Description>
                 <p>{ game.description_raw }</p>
               </Description>
               <div className="gallery">
                 {screen.results.map(screen => (
-                  <img src={smallImage(screen.image, 1920)} key={screen.id} alt={screen.image} />
+                  <img src={smallImage(screen.image, 1280)} key={screen.id} alt={screen.image} />
                 ))}
               </div>
           </Detail>
@@ -62,6 +62,7 @@ const CardShadow = styled(motion.div)`
   overflow-y: scroll;
   background: rgba(0, 0, 0, .5);
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   &::-webkit-scrollbar {
